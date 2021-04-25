@@ -1,7 +1,7 @@
 ---
 layout: default
-title: About
-permalink: /about/
+title: Contact me
+permalink: /contact/
 avatar: true
 navigation: true
 ---
