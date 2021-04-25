@@ -12,6 +12,6 @@ permalink: /
 
 ## Research Results
 ### Paper
-* 
+~ 
 ### Patent
-* 
+~
