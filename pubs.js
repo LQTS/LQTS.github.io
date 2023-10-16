@@ -6,14 +6,14 @@ const PUBLICATIONS = [
       "DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation",
     authors:
       "Qingtao Liu, Yu Cui, Qi Ye, Zhengnan Sun, Haoming Li, Gaofeng Li, Lin Shao, Jiming Chen",
-    image: "",
+    image: "./DexRepNet/resources/examples.png",
     conference: "IROS 2023",
     links: {
-      "project page": "",
+      "project page": "https://lqts.github.io/DexRepNet/",
       arxiv: "https://arxiv.org/abs/2303.09806",
       pdf: "https://arxiv.org/pdf/2303.09806",
       supp: "",
-      video: "",
+      video: "https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0",
       code: "",
     },
     badges: [],
