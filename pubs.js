@@ -20,6 +20,57 @@ const PUBLICATIONS = [
   },
   {
     title:
+      "InterRep: A Visual Interaction Representation for Robotic Grasping",
+    authors:
+      "Yu Cui, Qi Ye, Qingtao Liu, Anjun Chen, Gaofeng Li, Jiming Chen",
+    image: "./images/paper/interRep.png",
+    conference: "ICRA 2024",
+    links: {
+      "project page": "",
+      arxiv: "",
+      pdf: "",
+      supp: "",
+      video: "",
+      code: "",
+    },
+    badges: [],
+  },
+  {
+    title:
+      "TPGP: Temporal-Parametric Optimization with Deep Grasp Prior for Dexterous Motion Planning",
+    authors:
+      "Haoming Li, Qi Ye, Yuchi Huo, Qingtao Liu, Shijian Jiang, Tao Zhou Xiang Li, Yang Zhou, Jiming Chen",
+    image: "./images/paper/TPGP.png",
+    conference: "ICRA 2024",
+    links: {
+      "project page": "",
+      arxiv: "",
+      pdf: "",
+      supp: "",
+      video: "",
+      code: "",
+    },
+    badges: [],
+  },
+  {
+    title:
+        "Diff-LfD: Contact-aware Model-based Learning from Visual Demonstration for Robotic Manipulation via Differentiable Physics-based Simulation and Rendering",
+    authors:
+      "Xinghao Zhu, Jinghan Ke, Zhixuan Xu, Zhixin Sun, Bizhe Bai, Jun Lv, Qingtao Liu, Yuwei Zeng, Qi Ye, Cewu Lu, Masayoshi Tomizuka, Lin Shao",
+    image: "./images/paper/Diff-LfD.png",
+    conference: "CoRL 2023",
+    links: {
+      "project page": "https://sites.google.com/view/diff-lfd/",
+      arxiv: "",
+      pdf: "https://proceedings.mlr.press/v229/zhu23a/zhu23a.pdf",
+      supp: "https://drive.google.com/file/d/1s3IBZiUlNxrwUjlrX1Rk_gVh6TvMr9h6/view",
+      video: "https://drive.google.com/file/d/1RjgUOSzOMVmDfQoyKZhAa9BXNwdzX2ti/view",
+      code: "",
+    },
+    badges: ["Oral"],
+  },
+  {
+    title:
       "DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation",
     authors:
       "Qingtao Liu, Yu Cui, Qi Ye, Zhengnan Sun, Haoming Li, Gaofeng Li, Lin Shao, Jiming Chen",
