@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation</title>
+  <title>Masked Visual-Tactile Pre-training for Robot Manipulation</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js" type="module"></script>
 </head>
@@ -8,13 +8,13 @@
 <body> 
 
 <div class="container">
-  <h1><span style="font-size:42px">DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation</span></h1>
+  <h1><span style="font-size:42px">Masked Visual-Tactile Pre-training for Robot Manipulation</span></h1>
   <br>
   <table width="900px" align="center">
     <br>
       <td align=center width=160px>
         <center>
-          <span style="font-size:24px"><a href="https://LQTS.github.io/">Qingtao Liu<sup>1</sup>*</a></span>
+          <span style="font-size:24px"><a href="https://LQTS.github.io/">Qingtao Liu<sup>1</sup></a></span>
         </center>
       </td>
     <td align=center width=160px>
@@ -22,7 +22,7 @@
           <span style="font-size:24px"><a href="https://person.zju.edu.cn/yeqi">Qi Ye<sup>1&#10013</sup></a></span>
         </center>
       </td>
-      <td align=center width=160px>
+      <td align=center width=180px>
         <center>
         <span style="font-size:24px"><a href="">Zhengnan Sun<sup>1</sup></a></span>
         </center>
@@ -38,8 +38,8 @@
 <!--        <span style="font-size:24px"><a href="https://lihaoming45.github.io/">Haoming Li<sup>1</sup></a></span>-->
 <!--        </center>-->
 <!--      </td>-->
-<!--  </table>-->
-<!--  <table width="500px" align="center">-->
+  </table>
+  <table width="500px" align="center">
       <td align=center width=160px>
         <center>
         <span style="font-size:24px"><a href="https://person.zju.edu.cn/en/gaofengli">Gaofeng Li<sup>1</sup></a></span>
@@ -76,29 +76,29 @@
     <tr>
       <td align=center width=50px>
         <center>
-          <span style="font-size:24px"><a href="https://arxiv.org/abs/2303.09806">[Paper]</a></span>
+          <span style="font-size:24px">[Paper]</span>
         </center>
       </td>
-      <td align=center width=50px>
-        <center>
-          <span style="font-size:24px"><a href="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0">[Video]</a></span>
-        </center>
-      </td>
-      <td align=center width=100px>
-        <center>
-          <span style="font-size:24px">[Code is coming soon]</span>
-        </center>
-      </td>
+<!--      <td align=center width=50px>-->
+<!--        <center>-->
+<!--          <span style="font-size:24px"><a href="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0">[Video]</a></span>-->
+<!--        </center>-->
+<!--      </td>-->
+<!--      <td align=center width=100px>-->
+<!--        <center>-->
+<!--          <span style="font-size:24px">[Code is coming soon]</span>-->
+<!--        </center>-->
+<!--      </td>-->
   </table>
   
   <p>
     <div class="row">
-      <img src="resources/examples.png" style="width:80%; padding-top:35px;">
+      <img src="resources/examples.png" style="width:90%; padding-top:35px;">
     </div>
   </p>
 </div>
 
-</br>
+<!--</br>-->
 
 <div class="container">
   <h1>Abstract</h1>
@@ -107,23 +107,43 @@
     </p>
 </div>   
 
-</br>
+<!--</br>-->
+<!--<div class="container">-->
+<!--  <h1>Motivation</h1>-->
+<!--    <p>-->
+<!--      <img src="resources/method.png" style="width:80%; padding-top:0px;">-->
+<!--    </p>-->
+<!--</div>-->
+<!--</br>-->
 <div class="container">
   <h1>Method</h1>
+  <h2>How to gather visual-tactile data during human manipulation</h2>
     <p>
-      <img src="resources/method.png" style="width:80%; padding-top:0px;">
+      <img src="resources/hardware.png" style="width:80%; padding-top:0px;">
+    </p>
+  </br>
+    <h2>How to fuse vision and tactile information and use it in RL</h2>
+    <p>
+      <img src="resources/pretraining&policylearning.png" style="width:80%; padding-top:0px;">
+    </p>
+</div>
+
+<div class="container">
+  <h1>Experimental Results</h1>
+    <p>
+      <img src="resources/results.png" style="width:80%; padding-top:0px;">
     </p>
 </div>
 </br>
-<div class="container">
-  <h1>Video</h1>
-<!--    <iframe src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>-->
-<!-- <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="false"> </iframe>-->
-<iframe src="https://player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" allowfullscreen="allowfullscreen" width="80%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
-<!--<iframe src="//player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>-->
-</div>
+<!--<div class="container">-->
+<!--  <h1>Video</h1>-->
+<!--&lt;!&ndash;    <iframe src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>&ndash;&gt;-->
+<!--&lt;!&ndash; <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="false"> </iframe>&ndash;&gt;-->
+<!--<iframe src="https://player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" allowfullscreen="allowfullscreen" width="80%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>-->
+<!--&lt;!&ndash;<iframe src="//player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>&ndash;&gt;-->
+<!--</div>-->
 
-</br>
+<!--</br>-->
 
 <div class="container">
   <h1> BibTeX</h1>
@@ -134,11 +154,11 @@
       <code>
         @inproceedings{liu2024m2vtp,<br>
                 title={Masked Visual-Tactile Pre-training for Robot Manipulation},<br>
-                author={Liu, Qingtao and Sun, Zhengnan and Cui, Yu and Li, Gaofeng and Ye, Qi and Chen, Jiming},<br>
-<!--                booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},<br>-->
+                author={Liu, Qingtao and Ye, Qi and Sun, Zhengnan and Cui, Yu and Li, Gaofeng  and Chen, Jiming},<br>
+                booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},<br>
 <!--                pages={3153&#45;&#45;3160},<br>-->
-<!--                year={2023},<br>-->
-<!--                organization={IEEE}<br>-->
+                year={2024},<br>
+                organization={IEEE}<br>
               }
       </code>
     </td>

@@ -3,6 +3,23 @@
 const PUBLICATIONS = [
   {
     title:
+      "Masked Visual-Tactile Pre-training for Robot Manipulation",
+    authors:
+      "Qingtao Liu,  Qi Ye, Zhengnan Sun, Yu Cui, Gaofeng Li, Jiming Chen",
+    image: "./M2VTP/resources/icra24.png",
+    conference: "ICRA 2024",
+    links: {
+      "project page": "https://lqts.github.io/M2VTP/",
+      arxiv: "",
+      pdf: "https://www.researchgate.net/profile/Li-Gaofeng-2/publication/378067504_Masked_Visual-Tactile_Pre-training_for_Robot_Manipulation/links/65c4e5161e1ec12eff7c1483/Masked-Visual-Tactile-Pre-training-for-Robot-Manipulation.pdf",
+      supp: "",
+      video: "",
+      code: "",
+    },
+    badges: [],
+  },
+  {
+    title:
       "DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation",
     authors:
       "Qingtao Liu, Yu Cui, Qi Ye, Zhengnan Sun, Haoming Li, Gaofeng Li, Lin Shao, Jiming Chen",
@@ -18,26 +35,10 @@ const PUBLICATIONS = [
     },
     badges: [],
   },
-  {
-    title:
-      "Masked Visual-Tactile Pre-training for Robot Manipulation",
-    authors:
-      "Qingtao Liu,  Qi Ye, Zhengnan Sun, Yu Cui, Gaofeng Li, Jiming Chen",
-    image: "./DexRepNet/resources/examples.png",
-    conference: "ICRA 2024",
-    links: {
-      "project page": "https://lqts.github.io/M2VTP/",
-      arxiv: "",
-      pdf: "https://www.researchgate.net/profile/Li-Gaofeng-2/publication/378067504_Masked_Visual-Tactile_Pre-training_for_Robot_Manipulation/links/65c4e5161e1ec12eff7c1483/Masked-Visual-Tactile-Pre-training-for-Robot-Manipulation.pdf",
-      supp: "",
-      video: "https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0",
-      code: "",
-    },
-    badges: [],
-  },
+
 ];
 
-const HIGHLIGHT_NAME = "Qingtao Liu";
+const HIGHLIGHT_NAME = "qingtao liu";
 
 // Do not touch the code below
 

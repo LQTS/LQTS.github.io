@@ -1,6 +1,6 @@
 # Project Page
 
-A project page for our IROS 2023 paper "DexRepNet: Learning Dexterous Robotic Grasping Network with Geometric and Spatial Hand-Object Representation".
+A project page for our ICRA 2024 paper "Masked Visual-Tactile Pre-training for Robot Manipulation".
 
 # Copyright
 
