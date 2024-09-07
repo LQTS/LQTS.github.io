@@ -11,7 +11,7 @@ const PUBLICATIONS = [
     links: {
       "project page": "https://lqts.github.io/M2VTP/",
       arxiv: "",
-      pdf: "https://www.researchgate.net/profile/Li-Gaofeng-2/publication/378067504_Masked_Visual-Tactile_Pre-training_for_Robot_Manipulation/links/65c4e5161e1ec12eff7c1483/Masked-Visual-Tactile-Pre-training-for-Robot-Manipulation.pdf",
+      paper: "https://ieeexplore.ieee.org/abstract/document/10610933",
       supp: "",
       video: "",
       code: "",
@@ -28,7 +28,7 @@ const PUBLICATIONS = [
     links: {
       "project page": "",
       arxiv: "",
-      pdf: "",
+      paper: "https://ieeexplore.ieee.org/document/10610870",
       supp: "",
       video: "",
       code: "",
@@ -45,7 +45,7 @@ const PUBLICATIONS = [
     links: {
       "project page": "",
       arxiv: "",
-      pdf: "",
+      paper: "https://ieeexplore.ieee.org/document/10610408",
       supp: "",
       video: "",
       code: "",
@@ -62,7 +62,7 @@ const PUBLICATIONS = [
     links: {
       "project page": "https://sites.google.com/view/diff-lfd/",
       arxiv: "",
-      pdf: "https://proceedings.mlr.press/v229/zhu23a/zhu23a.pdf",
+      paper: "https://proceedings.mlr.press/v229/zhu23a/zhu23a.pdf",
       supp: "https://drive.google.com/file/d/1s3IBZiUlNxrwUjlrX1Rk_gVh6TvMr9h6/view",
       video: "https://drive.google.com/file/d/1RjgUOSzOMVmDfQoyKZhAa9BXNwdzX2ti/view",
       code: "",
@@ -79,7 +79,7 @@ const PUBLICATIONS = [
     links: {
       "project page": "https://lqts.github.io/DexRepNet/",
       arxiv: "https://arxiv.org/abs/2303.09806",
-      pdf: "https://arxiv.org/pdf/2303.09806",
+      paper: "https://arxiv.org/pdf/2303.09806",
       supp: "",
       video: "https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0",
       code: "",
