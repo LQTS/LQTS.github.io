@@ -80,6 +80,16 @@
           <span style="font-size:24px">[Paper]</span>
         </center>
       </td>
+      <td align=center width=50px>
+        <center>
+          <span style="font-size:24px">[Video]</span>
+        </center>
+      </td>
+      <td align=center width=100px>
+        <center>
+          <span style="font-size:24px">[Coding is coming soon]</span>
+        </center>
+      </td>
 <!--      <td align=center width=50px>-->
 <!--        <center>-->
 <!--          <span style="font-size:24px"><a href="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0">[Video]</a></span>-->
@@ -91,7 +101,7 @@
 <!--        </center>-->
 <!--      </td>-->
   </table>
-  
+
   <p>
 <!--    <div class="row">-->
 <!--      <img src="resources/examples.png" style="width:90%; padding-top:35px;">-->
@@ -104,8 +114,12 @@
 <div class="container">
   <h1>Abstract</h1>
     <p align="justify">
-Vision and touch are the most commonly used senses in human manipulation. While leveraging human manipulation videos for robotic task pretraining has shown promise in prior works, it is limited to image and language modalities and deployment to simple parallel grippers. In this paper, aiming to address the limitations, we collect a vision-tactile dataset by humans manipulating 10 daily tasks and 182 objects. In contrast with the existing datasets, our dataset is the first visual-tactile dataset for complex robotic manipulation skill learning. Also, we introduce a novel benchmark, featuring six complex dexterous manipulation tasks and a reinforcement learning-based vision-tactile skill learning framework. 17 non-pretraining and pretraining methods within the framework are designed and compared to investigate the effectiveness of different modalities and pertaining strategies. Key findings based on our benchmark results and analyses experiments include: 1) Despite the tactile modality used in our experiments being binary and sparse, including it directly in the policy training boosts the success rate by about 20% and joint pretraining it with vision gains a further 20%. 2) Joint pretraining visual-tactile modalities exhibits strong adaptability in unknown tasks and achieves robust performance among all tasks. 3) Using binary tactile signals with vision is robust to viewpoint setting, tactile noise, and the binarization threshold, which facilitates to the visual-tactile policy to be deployed in reality.    </p>
-</div>   
+Vision and touch are the most commonly used senses in human manipulation. While leveraging human manipulation videos for robotic task pretraining has shown promise in prior works, it is limited to image and language modalities and deployment to simple parallel grippers. In this paper, aiming to address the limitations, we collect a vision-tactile dataset by humans manipulating 10 daily tasks and 182 objects. In contrast with the existing datasets, our dataset is the first visual-tactile dataset for complex robotic manipulation skill learning. Also, we introduce a novel benchmark, featuring six complex dexterous manipulation tasks and a reinforcement learning-based vision-tactile skill learning framework. 17 non-pretraining and pretraining methods within the framework are designed and compared to investigate the effectiveness of different modalities and pertaining strategies. Key findings based on our benchmark results and analyses experiments include: 1) Despite the tactile modality used in our experiments being binary and sparse, including it directly in the policy training boosts the success rate by about 20% and joint pretraining it with vision gains a further 20%. 2) Joint pretraining visual-tactile modalities exhibits strong adaptability in unknown tasks and achieves robust performance among all tasks. 3) Using binary tactile signals with vision is robust to viewpoint setting, tactile noise, and the binarization threshold, which facilitates to the visual-tactile policy to be deployed in reality.
+    </p>
+      <p align="justify">
+        Notes: this paper is an extension of <a href="https://lqts.github.io/M2VTP/">M2VTP</a>. We collect more visual-tactile dataset and add more dexterous tasks for evaluation.
+    </p>
+</div>
 
 <!--</br>-->
 <!--<div class="container">-->
@@ -145,33 +159,25 @@ Vision and touch are the most commonly used senses in human manipulation. While 
 
 <!--</br>-->
 
-<div class="container">
-  <h1> BibTeX</h1>
-  <table align=center width=1000px height=250px>
-  <tr>
-<!--    <td align=left width=300px><a href=""><img class="layered-paper-big" style="height:180px" src="./resources/paper_preview.png"/></a></td>-->
-    <td width=700px style="color: #4d4b59; font-size:12pt">
-      <code>
-<!--        @inproceedings{liu2024m2vtp,<br>-->
-<!--                title={Masked Visual-Tactile Pre-training for Robot Manipulation},<br>-->
-<!--                author={Liu, Qingtao and Ye, Qi and Sun, Zhengnan and Cui, Yu and Li, Gaofeng  and Chen, Jiming},<br>-->
-<!--                booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},<br>-->
-<!--&lt;!&ndash;                pages={3153&#45;&#45;3160},<br>&ndash;&gt;-->
-<!--                year={2024},<br>-->
-<!--                organization={IEEE}<br>-->
-<!--              }-->
-        @inproceedings{
-          anonymous2025vtdexmanip,<br>
-          title={{VTD}exManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning},<br>
-          booktitle={The Thirteenth International Conference on Learning Representations},<br>
-          year={2025},<br>
-          url={https://openreview.net/forum?id=jf7C7EGw21}<br>
-          }
-      </code>
-    </td>
-  </tr>
-  </table>
-</div>
+<!--<div class="container">-->
+<!--  <h1> BibTeX</h1>-->
+<!--  <table align=center width=1000px height=250px>-->
+<!--  <tr>-->
+<!--&lt;!&ndash;    <td align=left width=300px><a href=""><img class="layered-paper-big" style="height:180px" src="./resources/paper_preview.png"/></a></td>&ndash;&gt;-->
+<!--    <td width=700px style="color: #4d4b59; font-size:12pt">-->
+<!--      <code>-->
+<!--        @inproceedings{-->
+<!--          anonymous2025vtdexmanip,<br>-->
+<!--          title={{VTD}exManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning},<br>-->
+<!--          booktitle={The Thirteenth International Conference on Learning Representations},<br>-->
+<!--          year={2025},<br>-->
+<!--          url={https://openreview.net/forum?id=jf7C7EGw21}<br>-->
+<!--          }-->
+<!--      </code>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </table>-->
+<!--</div>-->
 
 </br>
 
