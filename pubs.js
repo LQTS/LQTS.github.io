@@ -1,6 +1,23 @@
 // Modify the `PUBLICATIONS` object
 
 const PUBLICATIONS = [
+    {
+    title:
+      "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation With Reinforcement Learning",
+    authors:
+      "Qingtao Liu, Yu Cui, Zhengnan Sun, Gaofeng Li, Jiming Chen, Qi Ye",
+    image: "",
+    conference: "ICLR 2025",
+    links: {
+      "project page": "https://lqts.github.io/VTDexManip/",
+      arxiv: "",
+      paper: "",
+      supp: "",
+      video: "https://www.bilibili.com/video/BV15AfnYBEB1/?spm_id_from=333.1387.homepage.video_card.click",
+      code: "",
+    },
+    badges: [],
+  },
   {
     title:
       "Masked Visual-Tactile Pre-training for Robot Manipulation",
@@ -10,11 +27,11 @@ const PUBLICATIONS = [
     conference: "ICRA 2024",
     links: {
       "project page": "https://lqts.github.io/M2VTP/",
-      arxiv: "",
+      ResearchGate: "https://www.researchgate.net/publication/378067504_Masked_Visual-Tactile_Pre-training_for_Robot_Manipulation",
       paper: "https://ieeexplore.ieee.org/abstract/document/10610933",
       supp: "",
-      video: "",
-      code: "",
+      video: "https://www.bilibili.com/video/BV1pqkyYyEnp/?spm_id_from=333.1387.homepage.video_card.click",
+      code: "https://github.com/LQTS/M2VTP",
     },
     badges: [],
   },
