@@ -1,6 +1,6 @@
 # Project Page
 
-A project page for our ICRA 2024 paper "Masked Visual-Tactile Pre-training for Robot Manipulation".
+A project page for our ICLR 2025 paper "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation With Reinforcement Learning".
 
 # Copyright
 
