@@ -99,7 +99,7 @@ const PUBLICATIONS = [
       paper: "https://arxiv.org/pdf/2303.09806",
       supp: "",
       video: "https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0",
-      code: "",
+      code: "https://github.com/LQTS/DexRep_Isaac",
     },
     badges: [],
   },
