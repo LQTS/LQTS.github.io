@@ -60,11 +60,11 @@ const PUBLICATIONS = [
     image: "./images/paper/TPGP.png",
     conference: "ICRA 2024",
     links: {
-      "project page": "",
+      "project page": "https://lihaoming45.github.io/tpgp.github.io/",
       arxiv: "",
       paper: "https://ieeexplore.ieee.org/document/10610408",
       supp: "",
-      video: "",
+      video: "https://www.bilibili.com/video/BV1knk3Y7EN6/?spm_id_from=333.999.0.0",
       code: "",
     },
     badges: [],
