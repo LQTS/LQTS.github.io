@@ -1,191 +1,183 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation With Reinforcement Learning</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js" type="module"></script>
+  <meta charset="UTF-8">
+  <title>VTDexManip: Visual-Tactile Pretraining for Dexterous Manipulation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .authors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    .author {
+      font-size: 18px;
+    }
+    .affiliation {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .links {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .links a {
+      font-size: 18px;
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+    .links a:hover {
+      background-color: #e0f0ff;
+    }
+    h2 {
+      font-size: 24px;
+      margin-top: 40px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 6px;
+    }
+    p {
+      font-size: 16px;
+      text-align: justify;
+    }
+    iframe {
+      display: block;
+      margin: 20px auto;
+      border: none;
+      border-radius: 10px;
+    }
+    .video-placeholder {
+      width: 100%;
+      height: 400px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .footer {
+      text-align: center;
+      margin: 50px 0 20px;
+      font-size: 14px;
+      color: #777;
+    }
+    .footer a {
+      color: #555;
+    }
+  </style>
 </head>
-
-<body> 
+<body>
 
 <div class="container">
-  <h1><span style="font-size:42px">VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation With Reinforcement Learning</span></h1>
-  <br>
-  <table width="900px" align="center">
-    <br>
-      <td align=center width=160px>
-        <center>
-          <span style="font-size:24px"><a href="https://LQTS.github.io/">Qingtao Liu<sup>1</sup></a></span>
-        </center>
-      </td>
-    <td align=center width=170px>
-        <center>
-          <span style="font-size:24px"><a href="">Yu Cui<sup>1</sup></a></span>
-        </center>
-      </td>
 
-      <td align=center width=180px>
-        <center>
-        <span style="font-size:24px"><a href="">Zhengnan Sun<sup>1</sup></a></span>
-        </center>
-      </td>
-      <td align=center width=160px>
-        <center>
-        <span style="font-size:24px"><a href="https://person.zju.edu.cn/en/gaofengli">Gaofeng Li<sup>1</sup></a></span>
-        </center>
-      </td>
+  <div class="title">VTDexManip: A Dataset and Benchmark for Visual-Tactile Pretraining and Dexterous Manipulation With Reinforcement Learning</div>
 
-<!--      <td align=center width=160px>-->
-<!--        <center>-->
-<!--        <span style="font-size:24px"><a href="https://lihaoming45.github.io/">Haoming Li<sup>1</sup></a></span>-->
-<!--        </center>-->
-<!--      </td>-->
-  </table>
-  <table width="500px" align="center">
+  <div class="authors">
+    <div class="author"><a href="https://LQTS.github.io/">Qingtao Liu<sup>1</sup></a></div>
+    <div class="author">Yu Cui<sup>1</sup></div>
+    <div class="author">Zhengnan Sun<sup>1</sup></div>
+    <div class="author"><a href="https://person.zju.edu.cn/en/gaofengli">Gaofeng Li<sup>1</sup></a></div>
+    <div class="author"><a href="https://person.zju.edu.cn/jmchen">Jiming Chen<sup>1</sup></a></div>
+    <div class="author"><a href="https://person.zju.edu.cn/yeqi">Qi Ye<sup>1✝</sup></a></div>
+  </div>
 
-<!--      <td align=center width=160px>-->
-<!--        <center>-->
-<!--        <span style="font-size:24px"><a href="https://linsats.github.io">Lin Shao<sup>2</sup></a></span>-->
-<!--        </center>-->
-<!--      </td>-->
-      <td align=center width=160px>
-        <center>
-        <span style="font-size:24px"><a href="https://person.zju.edu.cn/jmchen">Jiming Chen<sup>1</sup></a></span>
-        </center>
-      </td>
-        <td align=center width=160px>
-        <center>
-          <span style="font-size:24px"><a href="https://person.zju.edu.cn/yeqi">Qi Ye<sup>1&#10013</sup></a></span>
-        </center>
-      </td>
+  <div class="affiliation"><sup>1</sup>Zhejiang University</div>
 
-  </table>
-  <br>
-  <table width="800px" align="center">
-    <td align=center width=250px>
-      <center>
-      <span style="font-size: 22px"><sup>1</sup>Zhejiang University</span>
-      </center>
-    </td>
-<!--    <td align=center width=250px>-->
-<!--      <center>-->
-<!--      <span style="font-size: 22px"><sup>2</sup>National University of Singapore</span>-->
-<!--      </center>-->
-<!--    </td>-->
+  <div class="links">
+    <a href="https://openreview.net/pdf?id=jf7C7EGw21">[Paper]</a>
+    <a href="https://github.com/LQTS/VTDexManip">[Code & Dataset]</a>
+    <a href="https://www.bilibili.com/video/BV15AfnYBEB1">[Project Video]</a>
+  </div>
 
-  </table>
-  <br>
-  <table width="700px" align="center">
-    <tr>
-      <td align=center width=50px>
-        <center>
-          <span style="font-size:24px">[Paper]</span>
-        </center>
-      </td>
-      <td align=center width=50px>
-        <center>
-          <span style="font-size:24px"><a href="https://www.bilibili.com/video/BV15AfnYBEB1/?spm_id_from=333.1387.homepage.video_card.click">[Video]</a></span>
-        </center>
-      </td>
-      <td align=center width=100px>
-        <center>
-          <span style="font-size:24px">[Coding is coming soon]</span>
-        </center>
-      </td>
-<!--      <td align=center width=50px>-->
-<!--        <center>-->
-<!--          <span style="font-size:24px"><a href="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0">[Video]</a></span>-->
-<!--        </center>-->
-<!--      </td>-->
-<!--      <td align=center width=100px>-->
-<!--        <center>-->
-<!--          <span style="font-size:24px">[Code is coming soon]</span>-->
-<!--        </center>-->
-<!--      </td>-->
-  </table>
-
+  <h2>Abstract</h2>
   <p>
-<!--    <div class="row">-->
-<!--      <img src="resources/examples.png" style="width:90%; padding-top:35px;">-->
-<!--    </div>-->
+    Vision and touch are essential sensory modalities in human manipulation. While prior works have leveraged human manipulation videos for pretraining robotic skills, most are limited to vision-language modalities and simple grippers.
+    To address this, we collect a large-scale visual-tactile dataset of humans performing 10 daily manipulation tasks across 182 objects. Our dataset is the first to support complex dexterous manipulation with visual-tactile information.
   </p>
+  <p>
+    We introduce a benchmark of 6 dexterous tasks and develop a reinforcement learning-based visual-tactile policy learning framework. We compare 17 baseline and pretraining strategies to assess the impact of different modalities.
+  </p>
+  <p>
+    Key results show: (1) incorporating sparse binary tactile signals boosts policy performance by ~20%, (2) joint visual-tactile pretraining improves generalization across tasks, and (3) the visual-tactile policy is robust to sensor noise and viewpoint variation.
+  </p>
+
+  <h2>Dataset Statistics</h2>
+  <img src="resources/dataset.jpg" alt="Dataset Statistics" style="width:100%; max-width:800px; display:block; margin:20px auto; border-radius:12px;">
+  <p style="text-align:left; max-width:800px; margin:10px auto;">
+    ★ Overview of our collected visual-tactile dataset, which includes 10 diverse manipulation tasks and 182 objects. (a) Our collection system. (b) The number of trajectories and objects. (c): The number of total frames (On: frames w/ contact; Off: frames w/o contact ). (d) The distribution of the number of frames. (e) t-SNE of the tactile signals
+  </p>
+
+  <h2>Benchmark Overview</h2>
+  <img src="resources/benchmark1.jpg" alt="Benchmark Overview" style="width:100%; max-width:800px; display:block; margin:20px auto; border-radius:12px;">
+  <p style="text-align:left; max-width:800px; margin:10px auto;">
+    ★ The proposed benchmark includes 6 complex dexterous manipulation tasks with vision-tactile RL training and evaluation. It is designed to test generalization across tasks and modalities. (a) shows the six tasks of our manipulation platform; (b) lists the 18 pretrained and non-pretrained models in our benchmark; (c) is the policy learning framework combines proprioceptive inputs and perception representations to guide actions within an MDP, with skills learned via PPO.
+  </p>
+
+   <h2>Video</h2>
+  <!-- &lt;!&ndash;    <iframe src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>&ndash;&gt; -->
+  <!-- &lt;!&ndash; <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="false"> </iframe>&ndash;&gt; -->
+  <iframe src="https://player.bilibili.com/player.html?aid=113881309514469&bvid=BV1bP411b7jh&cid=28047706206&p=1" allowfullscreen="allowfullscreen" width="80%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
+  <!-- &lt;!&ndash;<iframe src="//player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>&ndash;&gt; -->
+
+
+  <h2> BibTeX</h2>
+  <table align=center width=1000px height=250px>
+  <tr>
+    <td align=left width=200px><a href=""><img class="layered-paper-big" style="height:180px" src="./resources/paper_preview.png"/></a></td>
+    <td width=700px style="color: #4d4b59; font-size:12pt">
+      <code>
+        @inproceedings{liu2025vtdexmanip, <br>
+        title={VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning},<br>
+        author={Qingtao Liu and Yu Cui and Zhengnan Sun and Gaofeng Li and Jiming Chen and Qi Ye},<br>
+        booktitle={The Thirteenth International Conference on Learning Representations},<br>
+        year={2025},<br>
+        url={https://openreview.net/forum?id=jf7C7EGw21}<br>
+        }
+      </code>
+    </td>
+  </tr>
+  </table>
+
+
+  <h2>Contact</h2>
+  <p>For questions and collaborations, contact:</p>
+  <p><a href="mailto:l_qingtao@zju.edu.cn">l_qingtao@zju.edu.cn</a>, <a href="mailto:qi.ye@zju.edu.cn">qi.ye@zju.edu.cn</a></p>
+
 </div>
 
-<!--</br>-->
-
-<div class="container">
-  <h1>Abstract</h1>
-    <p align="justify">
-Vision and touch are the most commonly used senses in human manipulation. While leveraging human manipulation videos for robotic task pretraining has shown promise in prior works, it is limited to image and language modalities and deployment to simple parallel grippers. In this paper, aiming to address the limitations, we collect a vision-tactile dataset by humans manipulating 10 daily tasks and 182 objects. In contrast with the existing datasets, our dataset is the first visual-tactile dataset for complex robotic manipulation skill learning. Also, we introduce a novel benchmark, featuring six complex dexterous manipulation tasks and a reinforcement learning-based vision-tactile skill learning framework. 17 non-pretraining and pretraining methods within the framework are designed and compared to investigate the effectiveness of different modalities and pertaining strategies. Key findings based on our benchmark results and analyses experiments include: 1) Despite the tactile modality used in our experiments being binary and sparse, including it directly in the policy training boosts the success rate by about 20% and joint pretraining it with vision gains a further 20%. 2) Joint pretraining visual-tactile modalities exhibits strong adaptability in unknown tasks and achieves robust performance among all tasks. 3) Using binary tactile signals with vision is robust to viewpoint setting, tactile noise, and the binarization threshold, which facilitates to the visual-tactile policy to be deployed in reality.
-    </p>
-      <p align="justify">
-        Notes: this paper is an extension of <a href="https://lqts.github.io/M2VTP/">M2VTP</a>. We collect more visual-tactile dataset and add more dexterous tasks for evaluation.
-    </p>
+<div class="footer">
+  &copy; 2025 VTDexManip. Maintained by the authors.
 </div>
 
-<!--</br>-->
-<!--<div class="container">-->
-<!--  <h1>Motivation</h1>-->
-<!--    <p>-->
-<!--      <img src="resources/method.png" style="width:80%; padding-top:0px;">-->
-<!--    </p>-->
-<!--</div>-->
-<!--</br>-->
-<!--<div class="container">-->
-<!--  <h1>Method</h1>-->
-<!--  <h2>How to gather visual-tactile data during human manipulation</h2>-->
-<!--    <p>-->
-<!--      <img src="resources/hardware.png" style="width:80%; padding-top:0px;">-->
-<!--    </p>-->
-<!--  </br>-->
-<!--    <h2>How to fuse vision and tactile information and use it in RL</h2>-->
-<!--    <p>-->
-<!--      <img src="resources/pretraining&policylearning.png" style="width:80%; padding-top:0px;">-->
-<!--    </p>-->
-<!--</div>-->
-
-<!--<div class="container">-->
-<!--  <h1>Experimental Results</h1>-->
-<!--    <p>-->
-<!--      <img src="resources/results.png" style="width:80%; padding-top:0px;">-->
-<!--    </p>-->
-<!--</div>-->
-</br>
-<div class="container">
-  <h1>Video</h1>
-<!--    <iframe src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>-->
-<!-- <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.bilibili.com/video/BV1bP411b7jh/?spm_id_from=333.999.0.0&vd_source=811a28ecc0ef2e6c74261c8ae4105092&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="false"> </iframe>-->
-<iframe src="https://player.bilibili.com/player.html?aid=113881309514469&bvid=BV1bP411b7jh&cid=28047706206&p=1" allowfullscreen="allowfullscreen" width="80%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
-<!--<iframe src="//player.bilibili.com/player.html?aid=318689685&bvid=BV1bP411b7jh&cid=1271612680&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>-->
-</div>
-
-</br>
-
-<!--<div class="container">-->
-<!--  <h1> BibTeX</h1>-->
-<!--  <table align=center width=1000px height=250px>-->
-<!--  <tr>-->
-<!--&lt;!&ndash;    <td align=left width=300px><a href=""><img class="layered-paper-big" style="height:180px" src="./resources/paper_preview.png"/></a></td>&ndash;&gt;-->
-<!--    <td width=700px style="color: #4d4b59; font-size:12pt">-->
-<!--      <code>-->
-<!--        @inproceedings{-->
-<!--          anonymous2025vtdexmanip,<br>-->
-<!--          title={{VTD}exManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning},<br>-->
-<!--          booktitle={The Thirteenth International Conference on Learning Representations},<br>-->
-<!--          year={2025},<br>-->
-<!--          url={https://openreview.net/forum?id=jf7C7EGw21}<br>-->
-<!--          }-->
-<!--      </code>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--  </table>-->
-<!--</div>-->
-
-<!--</br>-->
-
-<div class="containersmall">
-  <p>Contact: <a href="mailto:l_qingtao@zju.edu.cn">Qingtao Liu</a>, <a href="mailto:qi.ye@zju.edu.cn">Qi Ye</a></p>
-  <!-- <p>Page template borrowed from <a href="https://gkioxari.github.io/usl/index.html">gkioxari</a></p> -->
-</div>
- 
 </body>
 </html>
