@@ -1,154 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+    <meta charset="UTF-8" />
     <title>Qingtao Liu</title>
-
     <meta name="author" content="Qingtao Liu" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
     <link rel="icon" type="image/png" href="images/floral_icon.png" />
-    <script src="pubs.js"></script>
+    <script defer src="pubs.js"></script>
   </head>
 
   <body>
-    <table
-      style="
-        width: 100%;
-        max-width: 800px;
-        border: 0px;
-        border-spacing: 0px;
-        border-collapse: separate;
-        margin-right: auto;
-        margin-left: auto;
-      "
-    >
-      <tbody>
-        <tr style="padding: 0px">
-          <td style="padding: 0px">
-            <table
-              style="
-                width: 100%;
-                border: 0px;
-                border-spacing: 0px;
-                border-collapse: separate;
-                margin-right: auto;
-                margin-left: auto;
-              "
-            >
-              <tbody>
-                <tr style="padding: 0px">
-                  <td style="padding: 2.5%; width: 30%; max-width: 30%">
-                    <a href="images/lqt.jpg"
-                      ><img
-                        style="width: 60%; max-width: 100%"
-                        alt="profile photo"
-                        src="images/lqt.jpg"
-                        class="hoverZoomLink"
-                    /></a>
-                  </td>
-                  <td style="padding: 2.5%; width: 80%; vertical-align: middle">
-                    <p style="text-align: center">
-                      <name>Qingtao Liu</name>
-                    </p>
-                    <p style="text-align: center">
-                      Phd Student <br />
-                      Zhejiang University<br />
-                    </p>
-                    <p style="text-align: center">
-                      <!-- Email: qi.ye at zju dot edu dot cn &nbsp&nbsp -->
-                      Email: <a href="mailto:l_qingtao@zju.edu.cn">l_qingtao@zju.edu.cn</a>
+    <div class="page">
+      <header class="hero">
+        <div class="hero__content">
+          <span class="hero__badge">PhD Student · Zhejiang University</span>
+          <h1>Qingtao Liu</h1>
+          <p class="hero__summary">
+            My work sits at the intersection of dexterous manipulation and multimodal representation learning. I enjoy building systems where tactile and visual signals come together to make robots act with intuition. Long-term goal: teach robots to learn from humans and serve people as collaborative partners.
+          </p>
+          <div class="hero__tags">
+            <span>Dexterous Manipulation</span>
+            <span>Multimodal Learning</span>
+            <span>Reinforcement Learning</span>
+          </div>
+          <div class="hero__actions">
+            <a class="btn primary" href="mailto:l_qingtao@zju.edu.cn">Email</a>
+            <a class="btn ghost" href="#pubs">Publications</a>
+            <a class="btn ghost" href="https://github.com/LQTS" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn ghost" href="https://scholar.google.com/citations?hl=zh-CN&user=F5d8WakAAAAJ" target="_blank" rel="noreferrer">Google Scholar</a>
+          </div>
+        </div>
+        <div class="hero__photo">
+          <div class="photo-frame">
+            <img src="images/lqt.jpg" alt="Qingtao Liu portrait" />
+          </div>
+          <div class="photo-caption">Hangzhou · Robotics & AI</div>
+        </div>
+      </header>
 
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table
-              style="
-                width: 100%;
-                border: 0px;
-                border-spacing: 0px;
-                border-collapse: separate;
-                margin-right: auto;
-                margin-left: auto;
-              "
-            >
+      <section class="section-card" id="about">
+        <div class="section-heading">
+          <h2>About</h2>
+          <span class="heading-line"></span>
+        </div>
+        <p>
+          I am a 5th-year PhD student at the College of Control Science and Engineering, Zhejiang University, advised by
+          <a href="https://person.zju.edu.cn/en/yeqi">Prof. Qi Ye</a> and
+          <a href="https://person.zju.edu.cn/en/jmchen">Prof. Jiming Chen</a>.
+          I develop generalizable hand–object representations (DexRepNet++/T-RO 2025, IJRR 2025), visual–tactile datasets and benchmarks (VTDexManip/ICLR 2025), and multi-task manipulation policies (ICRA/IROS/CoRL) that close the gap between robot and human dexterity.
+        </p>
+        <ul class="plain-list">
+          <li>Representation: DexRepNet++ learns spatial hand–object geometry for dexterous grasp/manipulation.</li>
+          <li>Data & benchmarks: VTDexManip provides large-scale visual–tactile pretraining for dexterous hands.</li>
+          <li>Policies: Multi-task RL and visual–tactile pretraining to enable human-like skills across objects and tasks.</li>
+        </ul>
+      </section>
 
-              <tbody>
-                <tr>
-                  <td
-                    style="padding: 20px; width: 100%; vertical-align: middle"
-                  >
-                    <heading>About me</heading>
-                    <p>
-                      My name is Qingtao Liu. I am currently pursuing a PhD at the College of Control Science and Engineering, Zhejiang University, under the supervision of <a href="https://person.zju.edu.cn/en/yeqi">Prof. Qi Ye</a> and <a href="https://person.zju.edu.cn/en/jmchen">Prof. Jiming Chen</a>. I graduated from China University of Geosciences (Wuhan) with a bachelor's degree in 2021. My current research mainly focuses on dexterous manipulation and multimodal representation learning.
-<!--                      I obtained my Bachelor's degree with communication engineering from Jilin University in 2019.-->
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table
-              style="
-                width: 100%;
-                border: 0px;
-                border-spacing: 0px;
-                border-collapse: separate;
-                margin-right: auto;
-                margin-left: auto;
-              "
-            >
-              <tbody>
-                <tr>
-                  <td
-                    style="padding: 20px; width: 100%; vertical-align: middle"
-                  >
-                    <heading>Publications</heading>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table
-              id="pub-list"
-              style="
-                width: 100%;
-                border: 0px;
-                border-spacing: 0px;
-                border-collapse: separate;
-                margin-right: auto;
-                margin-left: auto;
-              "
-            ></table>
+      <section class="section-card" id="news">
+        <div class="section-heading">
+          <h2>News</h2>
+          <span class="heading-line"></span>
+        </div>
+        <ul class="plain-list">
+          <li><strong>2025.11</strong> · DexRepNet++ accepted to IEEE T-RO (student first author, co-first overall).</li>
+          <li><strong>2025.10</strong> · Co-organized Dexterous Grasp Motion Challenge @ ICCV 2025 HANDS Workshop.</li>
+          <li><strong>2025.07</strong> · Contact2Motion accepted to IJRR (student second author).</li>
+          <li><strong>2025.06</strong> · Two papers accepted to IROS 2025.</li>
+          <li><strong>2025.01</strong> · VTDexManip accepted to ICLR 2025.</li>
+        </ul>
+      </section>
 
-            <table
-              style="
-                width: 100%;
-                border: 0px;
-                border-spacing: 0px;
-                border-collapse: separate;
-                margin-right: auto;
-                margin-left: auto;
-              "
-            >
-              <tbody>
-                <tr>
-                  <td style="padding: 0px">
-                    <br />
-                    <p style="text-align: right; font-size: small">
-                      Last updated: Nov 27, 2022
-                      <br />Template borrowed from
-                      <a href="https://jonbarron.info/">Jon Barron</a>.
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <section class="section-card" id="pubs">
+        <div class="section-heading">
+          <h2>Publications</h2>
+          <span class="heading-line"></span>
+        </div>
+        <p class="section-note">Recent and representative papers.</p>
+        <div class="pub-group">
+          <h3 class="pub-group-title">Journals</h3>
+          <div id="pub-list-journal" class="pub-grid"></div>
+        </div>
+        <div class="pub-group">
+          <h3 class="pub-group-title">Conferences</h3>
+          <div id="pub-list-conf" class="pub-grid"></div>
+        </div>
+      </section>
+
+      <section class="section-card" id="projects">
+        <div class="section-heading">
+          <h2>Projects</h2>
+          <span class="heading-line"></span>
+        </div>
+        <ul class="plain-list">
+          <li><strong>NSFC Center: Autonomous Intelligent Unmanned Systems</strong> · Dexterous hand skill learning for multi-task generalization in unstructured environments.</li>
+          <li><strong>Central Univ. Fund: Humanoid tactile skin sensor</strong> · Led tactile sensor benchmarking (since 2024).</li>
+          <li><strong>ZJU–Borui Joint Lab</strong> · SDF-based arm-hand online obstacle avoidance and replanning (2023).</li>
+          <li><strong>Dexterous Grasp Motion Challenge @ ICCV 2025</strong> · Organizer and baseline code contributor.</li>
+        </ul>
+      </section>
+
+      <section class="section-card" id="skills">
+        <div class="section-heading">
+          <h2>Skills</h2>
+          <span class="heading-line"></span>
+        </div>
+        <ul class="inline-tags">
+          <li>Python</li>
+          <li>C++</li>
+          <li>C#</li>
+          <li>C</li>
+          <li>Matlab</li>
+          <li>Isaac Gym</li>
+          <li>MuJoCo</li>
+          <li>PyBullet</li>
+          <li>ROS</li>
+          <li>Unitree Arm Z1</li>
+          <li>Shadow Hand</li>
+          <li>Allegro Hand</li>
+          <li>Leap Hand</li>
+          <li>Optical & piezoresistive tactile sensors</li>
+          <li>SolidWorks</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <span>Last updated: Jan 2025</span>
+        <span>Refreshed layout · inspired by clean, research-first design</span>
+      </footer>
+    </div>
   </body>
 </html>
