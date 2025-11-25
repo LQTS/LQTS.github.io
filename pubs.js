@@ -283,7 +283,8 @@ function createAuthorElement(authors) {
   const frag = document.createDocumentFragment();
   const elements = authors.split(/[,;]/g).map((author) => {
     const authorText = author.trim();
-    if (authorText.toLowerCase() === HIGHLIGHT_NAME) {
+    const normalized = authorText.replace(/\*/g, "").toLowerCase();
+    if (normalized === HIGHLIGHT_NAME) {
       const authorElem = document.createElement("strong");
       authorElem.textContent = authorText;
       return authorElem;
