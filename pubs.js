@@ -9,7 +9,7 @@ const PUBLICATIONS = [
     image: "./images/paper/Dexrepnet21.png",
     conference: "IEEE T-RO 2025",
     links: {
-      "project page": "",
+      "project page": "https://lqts.github.io/DexRepNet2/",
       arxiv: "",
       paper: "",
       supp: "",
