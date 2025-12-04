@@ -4,7 +4,7 @@ const PUBLICATIONS = [
   {
     title:
       "DexRepNet++: Learning Dexterous Robotic Manipulation with Geometric and Spatial Hand-Object Representations",
-    authors: "Qi Ye*, Qingtao Liu*, Zhengnan Sun, Yu Cui, Haoming Li, Gaofeng Li, Lin Shao, Jiming Chen",
+    authors: "Qingtao Liu, Zhengnan Sun, Yu Cui, Haoming Li, Gaofeng Li, Lin Shao, Jiming Chen, Qi Ye",
     type: "journal",
     image: "./images/paper/Dexrepnet21.png",
     conference: "IEEE T-RO 2025",
