@@ -1,638 +1,1893 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DexRepNet++: Learning Dexterous Robotic Manipulation with Geometric and Spatial Hand-Object Representations</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* 全局样式 */
-    :root {
-      --primary-color: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary-color: #0ea5e9;
-      --dark-bg: #0f172a;
-      --light-bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --accent-color: #3b82f6;
-      --border-color: #e2e8f0;
-      --success-color: #10b981;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
-    }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text-primary);
-      line-height: 1.6;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h1, h2, h3, h4 {
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
+<title>DexRepNet++: Learning Dexterous Robotic Manipulation with Geometric and Spatial Hand-Object Representations</title>
 
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    a:hover {
-      color: var(--primary-dark);
-    }
+<style>
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+/* 全局样式 */
 
-    /* 导航样式 */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      z-index: 1000;
-      padding: 1rem 0;
-    }
+:root {
 
-    .nav-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+--primary-color: #2563eb;
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
+--primary-dark: #1d4ed8;
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
+--secondary-color: #0ea5e9;
 
-    .nav-links a {
-      font-weight: 500;
-    }
+--dark-bg: #0f172a;
 
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--text-primary);
-      cursor: pointer;
-    }
+--light-bg: #f8fafc;
 
-    /* 英雄区域 */
-    .hero {
-      padding: 8rem 0 4rem;
-      text-align: center;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      position: relative;
-      overflow: hidden;
-    }
+--card-bg: #ffffff;
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 70%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-      z-index: 0;
-    }
+--text-primary: #1e293b;
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+--text-secondary: #64748b;
 
-    .title {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: var(--dark-bg);
-    }
+--accent-color: #3b82f6;
 
-    .title span {
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+--border-color: #e2e8f0;
 
-    .subtitle {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
+--success-color: #10b981;
 
-    /* 作者区域 */
-    .authors-section {
-      padding: 3rem 0;
-    }
+--shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
-    .authors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
+--shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
 
-    .author-card {
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+}
 
-    .author-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
 
-    .author-name {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
+* {
 
-    .author-affiliation {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
+margin: 0;
 
-    .author-email {
-      font-size: 0.85rem;
-      color: var(--primary-color);
-    }
+padding: 0;
 
-    .equal-contribution {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      text-align: center;
-    }
+box-sizing: border-box;
 
-    /* 按钮样式 */
-    .action-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
+}
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background-color: var(--primary-color);
-      color: white;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
 
-    .btn:hover {
-      background-color: var(--primary-dark);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-    }
+body {
 
-    .btn-outline {
-      background-color: transparent;
-      border: 2px solid var(--primary-color);
-      color: var(--primary-color);
-    }
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 
-    .btn-outline:hover {
-      background-color: var(--primary-color);
-      color: white;
-    }
+background-color: var(--light-bg);
 
-    /* 内容区块 */
-    .section {
-      padding: 4rem 0;
-    }
+color: var(--text-primary);
 
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      position: relative;
-    }
+line-height: 1.6;
 
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      border-radius: 2px;
-    }
+font-weight: 300;
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: box-shadow 0.3s ease;
-    }
+overflow-x: hidden;
 
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
+}
 
-    /* 摘要区域 */
-    .abstract {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
 
-    /* 图片展示 */
-    .image-container {
-      text-align: center;
-      margin: 2rem 0;
-    }
+h1, h2, h3, h4 {
 
-    .image-container img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-    }
+font-weight: 600;
 
-    /* 方法部分 */
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
+line-height: 1.2;
 
-    .method-card {
-      text-align: center;
-    }
+margin-bottom: 1rem;
 
-    .method-icon {
-      font-size: 3rem;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
+}
 
-    /* 视频部分 */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 比例 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-    }
 
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+a {
 
-    /* BibTeX 部分 */
-    .bibtex-code {
-      background-color: #1e293b;
-      color: #e2e8f0;
-      padding: 1.5rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+color: var(--primary-color);
 
-    /* 页脚 */
-    .footer {
-      background-color: var(--dark-bg);
-      color: #cbd5e1;
-      padding: 3rem 0;
-      text-align: center;
-    }
+text-decoration: none;
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
+transition: all 0.3s ease;
 
-    .footer-logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-    }
+}
 
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 1rem;
-    }
 
-    .footer-links a {
-      color: #94a3b8;
-    }
+a:hover {
 
-    .footer-links a:hover {
-      color: white;
-    }
+color: var(--primary-dark);
 
-    .copyright {
-      color: #64748b;
-      font-size: 0.9rem;
-    }
+}
 
-    /* 响应式设计 */
-    @media (max-width: 992px) {
-      .title {
-        font-size: 2.5rem;
-      }
-      
-      .authors-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      }
-    }
 
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 0.75rem 0;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .title {
-        font-size: 2rem;
-      }
-      
-      .hero {
-        padding: 6rem 0 3rem;
-      }
-      
-      .section {
-        padding: 3rem 0;
-      }
-      
-      .action-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-      }
-    }
+.container {
 
-    @media (max-width: 576px) {
-      .container {
-        padding: 0 1rem;
-      }
-      
-      .title {
-        font-size: 1.75rem;
-      }
-      
-      .authors-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-links {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
+max-width: 1200px;
 
-    /* 动画效果 */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+margin: 0 auto;
 
-    .animate-fade-in-up {
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
+padding: 0 2rem;
 
-    /* 延迟动画 */
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-    .delay-5 { animation-delay: 0.5s; }
+}
 
-    /* 滚动进度条 */
-    .progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: transparent;
-      z-index: 1001;
-    }
 
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-  </style>
+/* 导航样式 */
+
+.navbar {
+
+position: fixed;
+
+top: 0;
+
+width: 100%;
+
+background-color: rgba(255, 255, 255, 0.95);
+
+backdrop-filter: blur(10px);
+
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+z-index: 1000;
+
+padding: 1rem 0;
+
+}
+
+
+.nav-content {
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+}
+
+
+.logo {
+
+font-size: 1.5rem;
+
+font-weight: 700;
+
+color: var(--primary-color);
+
+}
+
+
+.nav-links {
+
+display: flex;
+
+gap: 2rem;
+
+}
+
+
+.nav-links a {
+
+font-weight: 500;
+
+}
+
+
+.mobile-menu-btn {
+
+display: none;
+
+background: none;
+
+border: none;
+
+font-size: 1.5rem;
+
+color: var(--text-primary);
+
+cursor: pointer;
+
+}
+
+
+/* 英雄区域 */
+
+.hero {
+
+padding: 8rem 0 4rem;
+
+text-align: center;
+
+background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+
+position: relative;
+
+overflow: hidden;
+
+}
+
+
+.hero::before {
+
+content: "";
+
+position: absolute;
+
+top: -50%;
+
+right: -20%;
+
+width: 70%;
+
+height: 200%;
+
+background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+
+z-index: 0;
+
+}
+
+
+.hero-content {
+
+position: relative;
+
+z-index: 1;
+
+}
+
+
+.title {
+
+font-size: 3rem;
+
+margin-bottom: 1.5rem;
+
+color: var(--dark-bg);
+
+}
+
+
+.title span {
+
+background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+
+-webkit-background-clip: text;
+
+background-clip: text;
+
+color: transparent;
+
+}
+
+
+.subtitle {
+
+font-size: 1.25rem;
+
+color: var(--text-secondary);
+
+max-width: 800px;
+
+margin: 0 auto 2rem;
+
+}
+
+
+/* 作者区域 */
+
+.authors-section {
+
+padding: 3rem 0;
+
+}
+
+
+.authors-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+gap: 2rem;
+
+margin-bottom: 2rem;
+
+}
+
+
+.author-card {
+
+text-align: center;
+
+padding: 1.5rem;
+
+background: var(--card-bg);
+
+border-radius: 12px;
+
+box-shadow: var(--shadow);
+
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+
+.author-card:hover {
+
+transform: translateY(-5px);
+
+box-shadow: var(--shadow-hover);
+
+}
+
+
+.author-name {
+
+font-weight: 600;
+
+margin-bottom: 0.5rem;
+
+}
+
+
+.author-affiliation {
+
+color: var(--text-secondary);
+
+font-size: 0.9rem;
+
+margin-bottom: 0.5rem;
+
+}
+
+
+.author-email {
+
+font-size: 0.85rem;
+
+color: var(--primary-color);
+
+}
+
+
+.equal-contribution {
+
+font-size: 0.9rem;
+
+color: var(--text-secondary);
+
+margin-bottom: 1rem;
+
+text-align: center;
+
+}
+
+
+/* 按钮样式 */
+
+.action-buttons {
+
+display: flex;
+
+justify-content: center;
+
+gap: 1rem;
+
+margin: 2rem 0;
+
+flex-wrap: wrap;
+
+}
+
+
+.btn {
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 0.5rem;
+
+padding: 0.75rem 1.5rem;
+
+background-color: var(--primary-color);
+
+color: white;
+
+border-radius: 8px;
+
+font-weight: 500;
+
+transition: all 0.3s ease;
+
+}
+
+
+.btn:hover {
+
+background-color: var(--primary-dark);
+
+color: white;
+
+transform: translateY(-2px);
+
+box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+
+}
+
+
+.btn-outline {
+
+background-color: transparent;
+
+border: 2px solid var(--primary-color);
+
+color: var(--primary-color);
+
+}
+
+
+.btn-outline:hover {
+
+background-color: var(--primary-color);
+
+color: white;
+
+}
+
+
+/* 内容区块 */
+
+.section {
+
+padding: 4rem 0;
+
+}
+
+
+.section-title {
+
+text-align: center;
+
+font-size: 2.5rem;
+
+margin-bottom: 3rem;
+
+position: relative;
+
+}
+
+
+.section-title::after {
+
+content: "";
+
+position: absolute;
+
+bottom: -10px;
+
+left: 50%;
+
+transform: translateX(-50%);
+
+width: 60px;
+
+height: 4px;
+
+background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+
+border-radius: 2px;
+
+}
+
+
+.card {
+
+background: var(--card-bg);
+
+border-radius: 12px;
+
+box-shadow: var(--shadow);
+
+padding: 2rem;
+
+margin-bottom: 2rem;
+
+transition: box-shadow 0.3s ease;
+
+}
+
+
+.card:hover {
+
+box-shadow: var(--shadow-hover);
+
+}
+
+
+/* 摘要区域 */
+
+.abstract {
+
+font-size: 1.1rem;
+
+line-height: 1.8;
+
+color: var(--text-primary);
+
+}
+
+
+/* 图片展示 */
+
+.image-container {
+
+text-align: center;
+
+margin: 2rem 0;
+
+}
+
+
+.image-container img {
+
+max-width: 100%;
+
+border-radius: 12px;
+
+box-shadow: var(--shadow);
+
+}
+
+
+/* 方法部分 */
+
+.method-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+gap: 2rem;
+
+}
+
+
+.method-card {
+
+text-align: center;
+
+}
+
+
+.method-icon {
+
+font-size: 3rem;
+
+color: var(--primary-color);
+
+margin-bottom: 1rem;
+
+}
+
+
+/* 视频部分 */
+
+.video-container {
+
+position: relative;
+
+padding-bottom: 56.25%; /* 16:9 比例 */
+
+height: 0;
+
+overflow: hidden;
+
+border-radius: 12px;
+
+box-shadow: var(--shadow);
+
+}
+
+
+.video-container iframe {
+
+position: absolute;
+
+top: 0;
+
+left: 0;
+
+width: 100%;
+
+height: 100%;
+
+border: none;
+
+}
+
+
+/* BibTeX 部分 */
+
+.bibtex-code {
+
+background-color: #1e293b;
+
+color: #e2e8f0;
+
+padding: 1.5rem;
+
+border-radius: 8px;
+
+overflow-x: auto;
+
+font-family: 'Courier New', monospace;
+
+font-size: 0.9rem;
+
+line-height: 1.5;
+
+}
+
+
+/* 页脚 */
+
+.footer {
+
+background-color: var(--dark-bg);
+
+color: #cbd5e1;
+
+padding: 3rem 0;
+
+text-align: center;
+
+}
+
+
+.footer-content {
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+gap: 1.5rem;
+
+}
+
+
+.footer-logo {
+
+font-size: 1.5rem;
+
+font-weight: 700;
+
+color: white;
+
+}
+
+
+.footer-links {
+
+display: flex;
+
+gap: 2rem;
+
+margin-bottom: 1rem;
+
+}
+
+
+.footer-links a {
+
+color: #94a3b8;
+
+}
+
+
+.footer-links a:hover {
+
+color: white;
+
+}
+
+
+.copyright {
+
+color: #64748b;
+
+font-size: 0.9rem;
+
+}
+
+
+/* 响应式设计 */
+
+@media (max-width: 992px) {
+
+.title {
+
+font-size: 2.5rem;
+
+}
+
+.authors-grid {
+
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+
+}
+
+}
+
+
+@media (max-width: 768px) {
+
+.navbar {
+
+padding: 0.75rem 0;
+
+}
+
+.nav-links {
+
+display: none;
+
+}
+
+.mobile-menu-btn {
+
+display: block;
+
+}
+
+.title {
+
+font-size: 2rem;
+
+}
+
+.hero {
+
+padding: 6rem 0 3rem;
+
+}
+
+.section {
+
+padding: 3rem 0;
+
+}
+
+.action-buttons {
+
+flex-direction: column;
+
+align-items: center;
+
+}
+
+.btn {
+
+width: 100%;
+
+max-width: 300px;
+
+justify-content: center;
+
+}
+
+}
+
+
+@media (max-width: 576px) {
+
+.container {
+
+padding: 0 1rem;
+
+}
+
+.title {
+
+font-size: 1.75rem;
+
+}
+
+.authors-grid {
+
+grid-template-columns: 1fr;
+
+}
+
+.footer-links {
+
+flex-direction: column;
+
+gap: 1rem;
+
+}
+
+}
+
+
+/* 动画效果 */
+
+@keyframes fadeInUp {
+
+from {
+
+opacity: 0;
+
+transform: translateY(30px);
+
+}
+
+to {
+
+opacity: 1;
+
+transform: translateY(0);
+
+}
+
+}
+
+
+.animate-fade-in-up {
+
+animation: fadeInUp 0.6s ease-out forwards;
+
+}
+
+
+/* 延迟动画 */
+
+.delay-1 { animation-delay: 0.1s; }
+
+.delay-2 { animation-delay: 0.2s; }
+
+.delay-3 { animation-delay: 0.3s; }
+
+.delay-4 { animation-delay: 0.4s; }
+
+.delay-5 { animation-delay: 0.5s; }
+
+
+/* 滚动进度条 */
+
+.progress-container {
+
+position: fixed;
+
+top: 0;
+
+left: 0;
+
+width: 100%;
+
+height: 4px;
+
+background: transparent;
+
+z-index: 1001;
+
+}
+
+
+.progress-bar {
+
+height: 100%;
+
+background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+
+width: 0%;
+
+transition: width 0.3s ease;
+
+}
+
+.journal-badge {
+
+margin-bottom: 1.5rem;
+
+}
+
+.paper-status {
+
+background: rgba(37, 99, 235, 0.1);
+
+color: var(--primary-color);
+
+padding: 0.5rem 1.2rem;
+
+border-radius: 50px;
+
+font-weight: 600;
+
+font-size: 0.9rem;
+
+border: 1px solid rgba(37, 99, 235, 0.2);
+
+text-transform: uppercase;
+
+letter-spacing: 1px;
+
+}
+
+.highlight {
+
+color: var(--primary-color);
+
+font-style: italic;
+
+}
+
+.key-metrics {
+
+display: flex;
+
+justify-content: center;
+
+gap: 1.5rem;
+
+margin-bottom: 2rem;
+
+flex-wrap: wrap;
+
+}
+
+.metric-tag {
+
+background: white;
+
+padding: 0.4rem 1rem;
+
+border-radius: 8px;
+
+font-size: 0.9rem;
+
+font-weight: 500;
+
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+border: 1px solid var(--border-color);
+
+color: var(--text-primary);
+
+}
+
+.metric-tag i {
+
+color: var(--success-color);
+
+margin-right: 5px;
+
+}
+
+.paper-full-title {
+
+font-size: 2.2rem;
+
+margin-bottom: 1.5rem;
+
+line-height: 1.3;
+
+}
+
+.abstract-grid {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 4rem;
+
+align-items: center;
+
+margin-bottom: 4rem;
+
+}
+
+
+.abstract-content {
+
+font-size: 1.1rem;
+
+line-height: 1.8;
+
+color: var(--text-primary);
+
+}
+
+
+.contribution-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+gap: 2rem;
+
+}
+
+
+.cont-card {
+
+background: white;
+
+padding: 2.5rem 2rem;
+
+border-radius: 16px;
+
+text-align: center;
+
+box-shadow: var(--shadow);
+
+transition: all 0.3s ease;
+
+border-bottom: 4px solid transparent;
+
+}
+
+
+.cont-card:hover {
+
+transform: translateY(-10px);
+
+border-bottom: 4px solid var(--primary-color);
+
+box-shadow: var(--shadow-hover);
+
+}
+
+
+.cont-icon {
+
+font-size: 2.5rem;
+
+color: var(--primary-color);
+
+margin-bottom: 1.5rem;
+
+}
+
+
+.cont-card h3 {
+
+font-size: 1.25rem;
+
+margin-bottom: 1rem;
+
+}
+
+
+.cont-card p {
+
+color: var(--text-secondary);
+
+font-size: 0.95rem;
+
+}
+
+
+/* 响应式适配 */
+
+@media (max-width: 992px) {
+
+.abstract-grid {
+
+grid-template-columns: 1fr;
+
+gap: 2rem;
+
+}
+
+}
+
+.task-tag {
+
+display: inline-block;
+
+background: var(--dark-bg);
+
+color: white;
+
+padding: 2px 12px;
+
+border-radius: 4px;
+
+font-size: 0.8rem;
+
+font-weight: 600;
+
+text-transform: uppercase;
+
+}
+
+
+.result-badge {
+
+display: block;
+
+padding: 10px;
+
+border-radius: 8px;
+
+font-weight: 700;
+
+text-align: center;
+
+font-size: 1.1rem;
+
+}
+
+
+.result-badge.success { background-color: #ecfdf5; color: #059669; }
+
+.result-badge.info { background-color: #eff6ff; color: #2563eb; }
+
+.result-badge.warning { background-color: #fffbeb; color: #d97706; }
+
+
+.highlight-banner {
+
+background: var(--dark-bg);
+
+color: white;
+
+padding: 3rem 2rem;
+
+border-radius: 16px;
+
+display: flex;
+
+justify-content: space-around;
+
+flex-wrap: wrap;
+
+gap: 2rem;
+
+}
+
+
+.banner-item {
+
+display: flex;
+
+align-items: center;
+
+gap: 1rem;
+
+font-size: 1rem;
+
+}
+
+
+.banner-item i {
+
+font-size: 1.5rem;
+
+color: var(--secondary-color);
+
+}
+
+/* 数据表格样式 */
+
+.comparison-table-wrapper {
+
+overflow-x: auto;
+
+margin: 1.5rem 0;
+
+border-radius: 12px;
+
+border: 1px solid var(--border-color);
+
+}
+
+
+.data-table {
+
+width: 100%;
+
+border-collapse: collapse;
+
+text-align: left;
+
+}
+
+
+.data-table th, .data-table td {
+
+padding: 1rem;
+
+border-bottom: 1px solid var(--border-color);
+
+}
+
+
+.data-table th {
+
+background-color: var(--light-bg);
+
+font-weight: 600;
+
+color: var(--text-secondary);
+
+}
+
+
+.highlight-row {
+
+background-color: rgba(37, 99, 235, 0.05);
+
+font-weight: 600;
+
+color: var(--primary-color);
+
+}
+
+
+.sim-label {
+
+font-weight: 700;
+
+color: var(--dark-bg);
+
+vertical-align: middle;
+
+background-color: #fafafa;
+
+}
+
+
+/* 分析列表 */
+
+.analysis-list {
+
+list-style: none;
+
+padding: 0;
+
+}
+
+
+.analysis-list li {
+
+margin-bottom: 0.8rem;
+
+padding-left: 1.5rem;
+
+position: relative;
+
+}
+
+
+.analysis-list li::before {
+
+content: "→";
+
+position: absolute;
+
+left: 0;
+
+color: var(--primary-color);
+
+font-weight: 700;
+
+}
+
+
+/* 统计高亮 */
+
+.stat-highlight {
+
+margin-top: 1.5rem;
+
+padding: 1rem;
+
+background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+
+color: white;
+
+border-radius: 8px;
+
+text-align: center;
+
+font-weight: 600;
+
+}
+
+
+/* 形态迁移格子 */
+
+.morphology-grid {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 1rem;
+
+}
+
+
+.morph-item {
+
+background: var(--light-bg);
+
+padding: 1rem;
+
+border-radius: 8px;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+}
+
+
+.morph-item span {
+
+font-size: 0.8rem;
+
+color: var(--text-secondary);
+
+}
+
+
+.morph-item strong {
+
+font-size: 1.2rem;
+
+color: var(--dark-bg);
+
+}
+
+
+.morph-item.highlight {
+
+border: 2px solid var(--primary-color);
+
+background: white;
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <!-- 滚动进度条 -->
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
+
+<!-- 滚动进度条 -->
+
+<div class="progress-container">
+
+<div class="progress-bar" id="progressBar"></div>
+
+</div>
+
+
+<!-- 导航栏 -->
+
+<!-- <nav class="navbar">
+
+<div class="container nav-content">
+
+<div class="logo">DexRepNet++</div>
+
+<div class="nav-links">
+
+<a href="#home">Home</a>
+
+<a href="#abstract">Abstract</a>
+
+<a href="#authors">Authors</a>
+
+<a href="#method">Method</a>
+
+<a href="#results">Results</a>
+
+<a href="#video">Video</a>
+
+<a href="#bibtex">BibTeX</a>
+
+</div>
+
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+
+<i class="fas fa-bars"></i>
+
+</button>
+
+</div>
+
+</nav> -->
+
+
+<!-- 首页英雄区域 -->
+
+<section class="hero" id="home">
+
+<div class="container hero-content">
+
+<div class="journal-badge animate-fade-in-up">
+
+<span class="paper-status">IEEE Transactions on Robotics (TRO)</span>
+
+</div>
+
+
+<h1 class="title animate-fade-in-up">
+
+<span>DexRepNet++</span>
+
+</h1>
+
+<h2 class="paper-full-title animate-fade-in-up delay-1">
+
+Learning Dexterous Robotic Manipulation with <br>
+
+<span class="highlight">Geometric and Spatial</span> Hand-Object Representations
+
+</h2>
+
+
+<div class="key-metrics animate-fade-in-up delay-2">
+
+<span class="metric-tag"><i class="fas fa-check-circle"></i> 87.9% Success Rate</span>
+
+<span class="metric-tag"><i class="fas fa-box-open"></i> 5000+ Unseen Objects</span>
+
+<span class="metric-tag"><i class="fas fa-bolt"></i> Sim-to-Real Deployment</span>
+
+</div>
+
+<p class="subtitle animate-fade-in-up delay-3">
+
+Introducing a novel representation that captures object surface features and spatial relations, enabling generalizable skills across grasping, in-hand reorientation, and bimanual handover.
+
+</p>
+
+<div class="action-buttons animate-fade-in-up delay-4">
+
+<a href="https://ieeexplore.ieee.org/document/11342339" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
+
+<a href="https://github.com/LQTS/DexRep_Isaac" class="btn btn-outline"><i class="fab fa-github"></i> Code for Grasping</a>
+
+<a href="https://github.com/PerPLe-ZJU/DexRep" class="btn btn-outline"><i class="fab fa-github"></i> Code for Other Tasks</a>
+
+<a href="#video" class="btn btn-outline"><i class="fas fa-play-circle"></i> Watch Video</a>
+
+</div>
+
+</div>
+
+</section>
+<section class="authors-section animate-fade-in-up">
+  <div class="container" style="text-align: center;">
+    <div style="margin-bottom: 2rem; font-size: 1.1rem;">
+      <strong>Qingtao Liu<sup>1</sup></strong>, 
+      <strong>Zhengnan Sun<sup>1</sup></strong>, 
+      <strong>Yu Cui<sup>1</sup></strong>, 
+      <strong>Haoming Li<sup>1</sup></strong>, 
+      <strong>Gaofeng Li<sup>1</sup></strong>, 
+      <strong>Lin Shao<sup>2</sup></strong>, 
+      <strong>Jiming Chen<sup>1</sup></strong>, 
+      <strong>Qi Ye<sup>1</sup></strong>
+    </div>
+    <div style="color: var(--text-secondary); font-size: 0.95rem;">
+      <span><sup>1</sup>Zhejiang University</span> &nbsp;&nbsp;
+      <span><sup>2</sup>National University of Singapore</span>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 1rem;">* Equal Contribution</p>
   </div>
-
-  <!-- 导航栏 -->
-  <!-- <nav class="navbar">
-    <div class="container nav-content"> 
-      <div class="logo">DexRepNet++</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#abstract">Abstract</a>
-        <a href="#authors">Authors</a>
-        <a href="#method">Method</a>
-        <a href="#results">Results</a>
-        <a href="#video">Video</a>
-        <a href="#bibtex">BibTeX</a>
-      </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav> -->
-
-  <!-- 首页英雄区域 -->
-  <section class="hero" id="home">
-    <div class="container hero-content">
-      <h1 class="title animate-fade-in-up">
-        <span>DexRepNet++</span>
-      </h1>
-      <h2 class="title animate-fade-in-up delay-1">
-        Learning Dexterous Robotic Manipulation with Geometric and Spatial Hand-Object Representations
-      </h2>
-      <p class="subtitle animate-fade-in-up delay-2">
-        A novel hand-object interaction representation enabling robust and generalizable dexterous manipulation across grasping, in-hand reorientation, and bimanual handover tasks.
-      </p>
-      
-      <div class="action-buttons animate-fade-in-up delay-3">
-        <!-- <a href="https://arxiv.org/abs/2303.09806" class="btn">
-          <i class="fas fa-file-pdf"></i> Paper
-        </a>
-        <a href="https://github.com/LQTS/DexRep_Isaac" class="btn btn-outline">
-          <i class="fab fa-github"></i> Code
-        </a>
-        <a href="https://www.bilibili.com/video/BV1bP411b7jh/" class="btn btn-outline">
-          <i class="fas fa-play-circle"></i> Video
-        </a>
-        <a href="#bibtex" class="btn btn-outline">
-          <i class="fas fa-quote-right"></i> BibTeX
-        </a> -->
-        <a href="" class="btn btn-outline">
-          <i class="fas fa-quote-right"></i> Code and Paper Coming Soon
-        </a>
-      </div>
-    </div>
-  </section>
+</section>
 
 
-  <!-- 摘要区域 -->
-  <section class="section" id="abstract">
+<!-- 摘要区域 -->
+
+<section class="section" id="abstract">
+
+<div class="container">
+
+<div class="abstract-grid">
+
+<div class="abstract-text animate-fade-in-up">
+
+<h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Abstract</h2>
+
+<p class="abstract-content">
+
+Robotic dexterous manipulation is a challenging problem due to <strong>high degrees of freedom (DoFs)</strong> and <strong>complex contacts</strong>. While existing methods focus on sample efficiency, less attention has been paid to the <strong>representations</strong> for generalization in complex hand-object interactions.
+
+<br><br>
+
+We propose <strong>DexRep</strong>, a novel representation capturing object surface features and spatial relations. Our method achieves a <strong>87.9% success rate</strong> on 5,000+ unseen objects and boosts performance by <strong>20% to 40%</strong> in reorientation and bimanual handover tasks.
+
+</p>
+
+</div>
+
+<div class="abstract-image animate-fade-in-up delay-1">
+
+<div class="video-placeholder">
+
+<img src="resources/pipeline.jpg" alt="DexRepNet++ System Pipeline" style="width: 100%; border-radius: 12px; box-shadow: var(--shadow);">
+
+<p style="font-size: 0.85rem; color: #64748b; margin-top: 10px; text-align: center;">
+
+<i>Fig 1. The DexRepNet++ framework: Integrating geometric surface features and spatial hand-object relations.</i>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="contribution-grid animate-fade-in-up delay-2">
+
+<div class="cont-card">
+
+<div class="cont-icon"><i class="fas fa-cube"></i></div>
+
+<h3>DexRep Representation</h3>
+
+<p>A novel geometric and spatial representation for robust hand-object interaction learning.</p>
+
+</div>
+
+<div class="cont-card">
+
+<div class="cont-icon"><i class="fas fa-layer-group"></i></div>
+
+<h3>Massive Generalization</h3>
+
+<p>Trained and validated on 5,000+ objects, achieving state-of-the-art success rates.</p>
+
+</div>
+
+<div class="cont-card">
+
+<div class="cont-icon"><i class="fas fa-robot"></i></div>
+
+<h3>Sim-to-Real Transfer</h3>
+
+<p>Seamless deployment on real robotic platforms with zero-shot or minimal fine-tuning.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="results" style="background-color: white;">
+
+<div class="container">
+
+<h2 class="section-title">Experiments & Results</h2>
+
+<p class="subtitle" style="text-align: center; margin-bottom: 3rem;">
+
+We evaluate DexRep across single and dual-hand tasks, demonstrating superior generalization and robustness.
+
+</p>
+
+
+<div class="image-container animate-fade-in-up" style="margin-bottom: 4rem;">
+
+<img src="resources/teaser.png" alt="DexRepNet++ Tasks" style="max-width: 1000px; margin: 0 auto; display: block;">
+
+<p style="font-size: 0.9rem; color: #64748b; margin-top: 15px; text-align: center;">
+
+<i>Fig 2. Policies learned with DexRep perform grasping, in-hand reorientation, and handover tasks.</i>
+
+</p>
+
+</div>
+
+
+<div class="method-grid">
+
+<div class="card animate-fade-in-up">
+
+<div class="task-tag">Task 1</div>
+
+<h3 style="margin: 1rem 0;"><i class="fas fa-hand-holding"></i> Dexterous Grasping</h3>
+
+<p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+
+Policies learned with only 40 objects generalize to <strong>5,000+ unseen shapes</strong>.
+
+</p>
+
+<div class="result-badge success">88.1% Success Rate</div>
+
+</div>
+
+
+<div class="card animate-fade-in-up delay-1">
+
+<div class="task-tag">Task 2</div>
+
+<h3 style="margin: 1rem 0;"><i class="fas fa-sync-alt"></i> In-Hand Reorientation</h3>
+
+<p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+
+Dynamic rotation to reach target orientations with high precision.
+
+</p>
+
+<div class="result-badge info">86.0% Success Rate</div>
+
+</div>
+
+
+<div class="card animate-fade-in-up delay-2">
+
+<div class="task-tag">Task 3</div>
+
+<h3 style="margin: 1rem 0;"><i class="fas fa-hands"></i> Bimanual Handover</h3>
+
+<p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+
+Smooth transfer between two hands, boosting success rates by up to 40%.
+
+</p>
+
+<div class="result-badge warning">77.3% Success Rate</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+<section class="section" id="detailed-results">
     <div class="container">
-      <h2 class="section-title">Abstract</h2>
-      
+      <h2 class="section-title">Quantitative Results & Analysis</h2>
+
       <div class="card animate-fade-in-up">
-        <p class="abstract">
-          Robotic dexterous manipulation is a challenging problem due to high degrees of freedom (DoFs) and complex contacts of multi-fingered robotic hands. Many existing deep reinforcement learning (DRL) based methods aim at improving sample efficiency in high-dimensional output action spaces. However, less attention has been paid to the representations for the generalization of a manipulation policy in the complex input space during the hand-object interaction. 
+        <div class="analysis-img" style="margin-bottom: 3rem; text-align: center;">
+          <img src="resources/eval_ablation.jpg" alt="Ablation Results" style="max-width: 900px; width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
+          <p style="text-align: center; font-size: 0.9rem; margin-top: 1rem; color: var(--text-secondary);">Fig 3. Quantitative comparison of component contributions across random seeds.</p>
+        </div>
+
+        <div class="analysis-text">
+          <h3 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem;">Ablation & Component Analysis</h3>
+          <p style="text-align: center; max-width: 800px; margin: 0 auto 2.5rem; font-size: 1.05rem;">
+            Through extensive ablation experiments on different representation components, we derive the following core insights:
+          </p>
           
-          In this paper, we propose DexRep, a novel hand-object interaction representation to capture object surface features and spatial relations between hands and objects for dexterous manipulation skill learning. Based on DexRep, policies are learned for three dexterous manipulation tasks: grasping, in-hand reorientation, and bimanual hand-over.
-          
-          Our method achieves a success rate of 87.9% on more than 5000 unseen objects for grasping, significantly surpassing existing work. For in-hand reorientation and handover tasks, DexRep boosts success rates by 20% to 40% over existing representations. The policies demonstrate a small Sim-to-Real gap and robust real-world deployment under multi-camera and single-camera setups.
-        </p>
+          <div class="method-grid"> <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; border-top: 4px solid var(--primary-color);">
+              <h4 style="margin-bottom: 1rem;"><i class="fas fa-chart-bar"></i> Surface Dominance</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Empirical results show that the surface feature ($f_s$) is the most critical individual component, achieving a success rate of approximately <strong>93.5%</strong> on unseen objects independently.
+              </p>
+            </div>
+
+            <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; border-top: 4px solid var(--secondary-color);">
+              <h4 style="margin-bottom: 1rem;"><i class="fas fa-project-diagram"></i> Synergetic Effects</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Peak performance (<strong>96.6% SR</strong>) is achieved only by combining occupancy ($f_o$), surface distance ($f_s$), and local geometry ($f_l$) for complex topologies.
+              </p>
+            </div>
+
+            <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; border-top: 4px solid var(--accent-color);">
+              <h4 style="margin-bottom: 1rem;"><i class="fas fa-microchip"></i> Local vs. Global</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Integrating global PointNet features (pGlo) degrades performance, proving that <strong>local geometric representations</strong> possess significantly stronger transferability.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- <div class="image-container animate-fade-in-up delay-1">
-        <img src="resources/examples.png" alt="DexRepNet++ Examples">
-      </div> -->
+
+      <div class="abstract-grid" style="grid-template-columns: 1fr 1fr; margin-top: 2rem;">
+        <div class="card animate-fade-in-up">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-hand-paper"></i> Multi-Morphology Support</h3>
+          <img src="resources/fig15_morph.png" alt="Morphology" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+          <table class="data-table">
+            <thead><tr><th>Configuration</th><th>2-Finger</th><th>3-Finger</th><th>4-Finger</th></tr></thead>
+            <tbody><tr><td><strong>DexRep (%)</strong></td><td>65.4%</td><td>78.2%</td><td>81.5%</td></tr></tbody>
+          </table>
+          <div style="margin-top: 1.5rem;">
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">
+              <strong>Hand Agnosticism:</strong> DexRep models the spatial-geometric relationship of interactions rather than joint signals, allowing seamless adaptation to robots with different finger counts.
+            </p>
+          </div>
+        </div>
+
+        <div class="card animate-fade-in-up">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-video"></i> Robustness Analysis</h3>
+          <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+            <h4 style="color: var(--success-color);">Real-world Deployment</h4>
+            <p style="font-weight: 700; font-size: 1.5rem;">85.0% Success Rate</p>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">under partial observations</p>
+          </div>
+          <div style="font-size: 0.95rem; color: var(--text-secondary);">
+            <p style="margin-bottom: 1rem;">
+              <strong>Noise Tolerance:</strong> Voxel-based encoding provides inherent tolerance to sensor noise and occlusions typical of commodity cameras.
+            </p>
+            <p>
+              <strong>Zero-Shot Transfer:</strong> Despite incomplete point clouds, DexRep maintains a minimal sim-to-real gap (under 5% drop).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="section" id="platform" style="background-color: white;">
+    <div class="container">
+      <h2 class="section-title">Hardware Platform</h2>
+      <div style="text-align: center; max-width: 850px; margin: 0 auto;">
+        <img src="resources/HardwareSystem.png" alt="Platform" style="width: 50%; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 1rem;">
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Fig 4. Our experimental setup: Allegro Hand v4, Unitree Z1 arm, and Azure Kinect DK sensors.</p>
+      </div>
     </div>
   </section>
 
-  
+<section class="section" id="video" style="background-color: var(--dark-bg); color: white;">
+    <div class="container">
+      <h2 class="section-title" style="color: white;">Supplementary Video</h2>
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FYojr_K6lDs?si=DxBBzpVcK-RgKKbc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+    </div>
+  </section>
+  <section class="section" id="bibtex">
+  <div class="container">
+    <h2 class="section-title">BibTeX</h2>
+    <div class="card">
+      <pre class="bibtex-code">
+@ARTICLE{liu2026dexrepnet++,
+  author={Liu, Qingtao and Sun, Zhengnan and Cui, Yu and Li, Haoming and Li, Gaofeng and Shao, Lin and Chen, Jiming and Ye, Qi},
+  journal={IEEE Transactions on Robotics}, 
+  title={DexRepNet++: Learning Dexterous Robotic Manipulation With Geometric and Spatial Hand-Object Representations}, 
+  year={2026},
+  volume={42},
+  number={},
+  pages={799-818},
+  keywords={Hands;Geometry;Grasping;Robots;Encoding;Handover;Training;Shape;Feature extraction;Visualization;Deep learning in robotics and automation;dexterous manipulation;hand-object representation;reinforcement learning (RL)},
+  doi={10.1109/TRO.2026.3651669}}
+}</pre>
+    </div>
+  </div>
+</section>
+<script>
 
-  <script>
-    // 滚动进度条
-    window.addEventListener('scroll', function() {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('progressBar').style.width = scrolled + '%';
-    });
+// 滚动进度条
 
-    // 移动端菜单切换
-    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-      const navLinks = document.querySelector('.nav-links');
-      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
+window.addEventListener('scroll', function() {
 
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-          
-          // 关闭移动端菜单
-          if (window.innerWidth <= 768) {
-            document.querySelector('.nav-links').style.display = 'none';
-          }
-        }
-      });
-    });
+const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 
-    // 滚动动画
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-        }
-      });
-    }, observerOptions);
+const scrolled = (winScroll / height) * 100;
 
-    // 观察所有需要动画的元素
-    document.querySelectorAll('.card, .image-container, .method-grid > div').forEach(el => {
-      observer.observe(el);
-    });
+document.getElementById('progressBar').style.width = scrolled + '%';
 
-    // 页面加载时添加动画类
-    window.addEventListener('load', function() {
-      document.querySelectorAll('.animate-fade-in-up').forEach((el, index) => {
-        el.style.animationDelay = `${index * 0.1}s`;
-      });
-    });
-  </script>
+});
+
+
+// 移动端菜单切换
+
+document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+
+const navLinks = document.querySelector('.nav-links');
+
+navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+
+});
+
+
+// 平滑滚动
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+anchor.addEventListener('click', function(e) {
+
+e.preventDefault();
+
+const targetId = this.getAttribute('href');
+
+if (targetId === '#') return;
+
+const targetElement = document.querySelector(targetId);
+
+if (targetElement) {
+
+window.scrollTo({
+
+top: targetElement.offsetTop - 80,
+
+behavior: 'smooth'
+
+});
+
+// 关闭移动端菜单
+
+if (window.innerWidth <= 768) {
+
+document.querySelector('.nav-links').style.display = 'none';
+
+}
+
+}
+
+});
+
+});
+
+
+// 滚动动画
+
+const observerOptions = {
+
+threshold: 0.1,
+
+rootMargin: '0px 0px -50px 0px'
+
+};
+
+
+const observer = new IntersectionObserver((entries) => {
+
+entries.forEach(entry => {
+
+if (entry.isIntersecting) {
+
+entry.target.classList.add('animate-fade-in-up');
+
+}
+
+});
+
+}, observerOptions);
+
+
+// 观察所有需要动画的元素
+
+document.querySelectorAll('.card, .image-container, .method-grid > div').forEach(el => {
+
+observer.observe(el);
+
+});
+
+
+// 页面加载时添加动画类
+
+window.addEventListener('load', function() {
+
+document.querySelectorAll('.animate-fade-in-up').forEach((el, index) => {
+
+el.style.animationDelay = `${index * 0.1}s`;
+
+});
+
+});
+
+</script>
+
 </body>
-</html>
+
+</html> 
