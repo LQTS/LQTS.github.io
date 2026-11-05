@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Qingtao Liu</title>
+    <title>Qingtao Liu | Dexterous Manipulation & Robot Learning</title>
+    <meta name="description" content="Qingtao Liu studies dexterous manipulation, visual-tactile representation learning, reinforcement learning, and embodied policies." />
     <meta name="author" content="Qingtao Liu" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
@@ -11,13 +12,15 @@
   </head>
 
   <body>
+    <a class="skip-link" href="#about">Skip to content</a>
     <div class="page">
+      <nav class="site-nav" aria-label="Main navigation"><a href="#" aria-label="Back to top">Qingtao Liu <span>刘庆涛</span></a><div><a href="#about">About</a><a href="#research">Research</a><a href="#pubs">Publications</a><a href="#opensource">Code</a></div></nav>
       <header class="hero">
         <div class="hero__content">
-          <span class="hero__badge">PhD Student · Zhejiang University</span>
+          <span class="hero__badge">Dexterous Manipulation · Robot Learning</span>
           <h1>Qingtao Liu</h1>
           <p class="hero__summary">
-            My work sits at the intersection of dexterous manipulation and multimodal representation learning. I enjoy building systems where tactile and visual signals come together to make robots act with intuition. Long-term goal: teach robots to learn from humans and serve people as collaborative partners.
+            I build learning and control systems for dexterous robotic manipulation. My research connects vision, touch, and action—from hand–object representations and visual–tactile pretraining to reinforcement learning and embodied policies.
           </p>
           <div class="hero__tags">
             <span>Dexterous Manipulation</span>
@@ -35,7 +38,7 @@
           <div class="photo-frame">
             <img src="images/lqt.jpg" alt="Qingtao Liu portrait" />
           </div>
-          <div class="photo-caption">Hangzhou · Robotics & AI</div>
+          <div class="photo-caption">Vision · Touch · Action</div>
         </div>
       </header>
 
@@ -45,21 +48,28 @@
           <span class="heading-line"></span>
         </div>
         <p>
-          I am a 5th-year PhD student at the College of Control Science and Engineering, Zhejiang University, advised by
+          My research focuses on enabling robots to learn transferable manipulation skills from multimodal data and physical interaction. I work on dexterous manipulation, visual–tactile representation learning, reinforcement learning, and vision–language–action / world action models.
+        </p>
+        <p>
+          At Zhejiang University, I have worked with
           <a href="https://person.zju.edu.cn/en/yeqi">Prof. Qi Ye</a> and
           <a href="https://person.zju.edu.cn/en/jmchen">Prof. Jiming Chen</a>.
-          I develop generalizable hand–object representations (DexRepNet++/T-RO 2025, IJRR 2025), visual–tactile datasets and benchmarks (VTDexManip/ICLR 2025), and multi-task manipulation policies (ICRA/IROS/CoRL) that close the gap between robot and human dexterity.
+          My work spans geometric hand–object representations, visual–tactile datasets and benchmarks, and policies for contact-rich manipulation.
         </p>
-        <ul class="plain-list">
-          <li>Representation: DexRepNet++ learns spatial hand–object geometry for dexterous grasp/manipulation.</li>
-          <li>Data & benchmarks: VTDexManip provides large-scale visual–tactile pretraining for dexterous hands.</li>
-          <li>Policies: Multi-task RL and visual–tactile pretraining to enable human-like skills across objects and tasks.</li>
-        </ul>
+      </section>
+
+      <section class="section-card" id="research" aria-labelledby="research-title">
+        <div class="section-heading"><h2 id="research-title">Research</h2><span class="heading-line"></span></div>
+        <div class="research-grid">
+          <article><span class="research-number">01</span><h3>Representing interaction</h3><p>Learning hand–object geometry and visual–tactile representations that transfer across objects and tasks.</p><a href="DexRepNet2/">DexRepNet++ →</a></article>
+          <article><span class="research-number">02</span><h3>Learning through touch</h3><p>Building multimodal datasets and pretraining methods to connect human demonstrations with robot manipulation.</p><a href="VTDexManip/">VTDexManip →</a></article>
+          <article><span class="research-number">03</span><h3>Closing the control loop</h3><p>Connecting reinforcement learning and embodied policies with contact-aware feedback for dexterous skills.</p><a href="https://github.com/LQTS/DexRep_Isaac">Simulation &amp; policies →</a></article>
+        </div>
       </section>
 
       <section class="section-card" id="news">
         <div class="section-heading">
-          <h2>News</h2>
+          <h2>Research milestones</h2>
           <span class="heading-line"></span>
         </div>
         <ul class="plain-list">
@@ -76,7 +86,8 @@
           <h2>Publications</h2>
           <span class="heading-line"></span>
         </div>
-        <p class="section-note">Recent and representative papers.</p>
+        <p class="section-note">Journal and conference publications. <a href="https://scholar.google.com/citations?hl=en&amp;user=F5d8WakAAAAJ">Full list on Google Scholar →</a></p>
+        <noscript><p>Enable JavaScript to view publication cards, or browse the full list on Google Scholar.</p></noscript>
         <div class="pub-group">
           <h3 class="pub-group-title">Journals</h3>
           <div id="pub-list-journal" class="pub-grid"></div>
@@ -84,6 +95,16 @@
         <div class="pub-group">
           <h3 class="pub-group-title">Conferences</h3>
           <div id="pub-list-conf" class="pub-grid"></div>
+        </div>
+      </section>
+
+      <section class="section-card" id="opensource">
+        <div class="section-heading"><h2>Open source</h2><span class="heading-line"></span></div>
+        <div class="resource-grid">
+          <a href="https://github.com/LQTS/VTDexManip"><strong>VTDexManip</strong><span>Visual–tactile dataset and manipulation benchmark ↗</span></a>
+          <a href="https://github.com/LQTS/DexRep_Isaac"><strong>DexRep</strong><span>Geometric hand–object representations in Isaac Gym ↗</span></a>
+          <a href="https://github.com/LQTS/M2VTP"><strong>M2VTP</strong><span>Masked visual–tactile pretraining ↗</span></a>
+          <a href="https://github.com/LQTS/Awesome-Touch"><strong>Awesome Touch</strong><span>Explore tactile sensing and robot learning resources ↗</span></a>
         </div>
       </section>
 
@@ -125,8 +146,9 @@
       </section>
 
       <footer class="footer">
-        <span>Last updated: Nov 25, 2025</span>
+        <span>Last updated: November 5, 2026</span>
       </footer>
     </div>
   </body>
 </html>
+
