@@ -1,4 +1,4 @@
-// Modify the `PUBLICATIONS` object
+// Publication data and rendering. Keep unverified links empty.
 
 const PUBLICATIONS = [
   {
@@ -16,7 +16,7 @@ const PUBLICATIONS = [
       video: "",
       code: "",
     },
-    badges: ["Accepted", "coming soon"],
+    badges: ["Accepted"],
   },
   {
     title:
@@ -33,7 +33,7 @@ const PUBLICATIONS = [
       poster: "./VTDexManip/resources/poster_ilcr25_vtdenmanip.pdf",
       video:
         "https://www.bilibili.com/video/BV15AfnYBEB1/?spm_id_from=333.1387.homepage.video_card.click",
-      code: "",
+      code: "https://github.com/LQTS/VTDexManip",
     },
     badges: [],
   },
@@ -87,7 +87,7 @@ const PUBLICATIONS = [
       video: "",
       code: "",
     },
-    badges: ["Accepted", "coming soon"],
+    badges: ["Accepted"],
   },
   {
     title:
@@ -230,6 +230,8 @@ function createPublicationRow({ title, authors, conference, image, links, badges
   if (image) {
     const img = document.createElement("img");
     img.src = image;
+    img.loading = "lazy";
+    img.decoding = "async";
     img.alt = `${title} preview`;
     media.append(img);
   } else {
